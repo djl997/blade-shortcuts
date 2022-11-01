@@ -18,6 +18,16 @@ class BladeShortcutsServiceProvider extends ServiceProvider
         Blade::directive('boolean', static function ($value): string {
             return BladeShortcutsDirectives::boolean($value);
         });
+
+        Blade::directive('filesize', function ($expression) {
+            return BladeShortcutsDirectives::filesize($expression);
+        });
+        Blade::directive('filesizemb', function ($expression) {
+            return BladeShortcutsDirectives::filesize($expression, 'MB');
+        });
+        Blade::directive('filesizegb', function ($expression) {
+            return BladeShortcutsDirectives::filesize($expression, 'GB');
+        });
     }
 
     /**
