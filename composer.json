@@ -1,0 +1,28 @@
+{
+    "name": "djl997/blade-shortcuts",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Djl997\\BladeShortcuts\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dirk Jan",
+            "email": "dirkjan@q2-software.nl"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8.80|^9.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Djl997\\BladeShortcuts\\BladeShortcutsServiceProvider"
+            ]
+        }
+    }
+}
