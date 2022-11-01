@@ -6,6 +6,9 @@
 
 Blade Shortcuts is a library of handy Blade Directives as listed below.
 
+## Requirements
+Blade Shortcuts requires PHP 8+ and Laravel 6+.
+
 ## Installation
 You can install the package via composer:
 ```bash
