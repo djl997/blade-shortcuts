@@ -24,6 +24,29 @@ After installation all blade directives should be usable. Try running `php artis
 @boolean(false) <!-- false -->
 ```
 
+### Date
+Automatically translate dates in the correct localized format (currently only EN, NL, DE supported):
+- EN: November 8, 2022
+- NL: 8 november 2022
+- DE: 8. November 2022
+
+```blade
+@date(time()) <!-- November 8, 2022 -->
+@date(date('Y-m-d')) <!-- November 8, 2022 -->
+```
+
+Other options:
+```blade
+@date(now()->subHours(20)) <!-- November 14, 2022 -->
+@date(now()->subHours(20), 'dateOrDiff') <!-- 20 hours ago -->
+@date(now()->subWeek()) <!-- November 8, 2022 -->
+@date(now()->subWeek(), 'dateOrDiff') <!-- November 8, 2022 -->
+
+@date(null)
+@date('')
+@date(0)
+```
+
 ### Filesize
 ```blade
 @filesize(2145) <!-- 2 kB -->
