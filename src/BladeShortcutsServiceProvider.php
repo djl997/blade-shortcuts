@@ -15,18 +15,24 @@ class BladeShortcutsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('boolean', static function ($value): string {
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'blade_directives');
+
+        Blade::directive('boolean', function ($value): string {
             return BladeShortcutsDirectives::boolean($value);
         });
 
-        Blade::directive('filesize', function ($expression) {
+        Blade::directive('filesize', function ($expression): string {
             return BladeShortcutsDirectives::filesize($expression);
         });
-        Blade::directive('filesizemb', function ($expression) {
+        Blade::directive('filesizemb', function ($expression): string {
             return BladeShortcutsDirectives::filesize($expression, 'MB');
         });
-        Blade::directive('filesizegb', function ($expression) {
+        Blade::directive('filesizegb', function ($expression): string {
             return BladeShortcutsDirectives::filesize($expression, 'GB');
+        });
+
+        Blade::directive('date', function ($expression): string {
+            return BladeShortcutsDirectives::date($expression);
         });
     }
 

@@ -4,11 +4,26 @@ namespace Djl997\BladeShortcuts;
 
 class BladeShortcutsBladeDirectives
 {
+    /**
+     * Boolean directive
+     * 
+     * @param  string  $value  boolean value (TRUE "1", "true", "on" and "yes", FALSE "0", "false", "off" and "no")
+     *
+     * @return string
+     */
     public function boolean(string $value): string
     {
         return "<?= json_encode(filter_var($value, FILTER_VALIDATE_BOOLEAN)); ?>";
     }
 
+    /**
+     * Filesize directive
+     * 
+     * @param  string  $value  bytes amount to convert
+     * @param  string  $size   choose filesize to convert the bytes to, default will fallback to kB
+     *
+     * @return string
+     */
     public function filesize(string $value, string $size = 'kB'): string
     {
         switch ($size) {
@@ -24,6 +39,32 @@ class BladeShortcutsBladeDirectives
                 return "<?php echo number_format($value/ 1024, 0, ',', '.') . ' kB'; ?>";
                 break;
         }        
+    }
+
+    /**
+     * Local formatted date directive
+     * 
+     * @param  string  $value  
+     *
+     * @return string
+     */
+    public function date(string $expression)
+    {
+        $arr = Parser::multipleArgs($expression);
+            
+        if(count($arr) === 2) {
+            switch ($arr[1]) {
+                case "'dateOrDiff'":
+                    return "<?php if(!is_null($arr[0])) { if(\Carbon\Carbon::parse($arr[0])->diffInHours() > 23) { echo Carbon\Carbon::parse($arr[0])->translatedFormat(__('blade_directives::format.date')); } else { echo Carbon\Carbon::parse($arr[0])->diffForHumans(['options' => Carbon\Carbon::ONE_DAY_WORDS]); } } else { echo ''; } ?>";
+                    break;
+
+                default:
+                    return "<?php echo is_null($expression) ? '' : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); ?>";
+                    break;
+            }
+        }
+
+        return "<?php echo is_null($expression) ? '' : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); ?>";
     }
 
 }
