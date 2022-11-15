@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'day' => 'l j F Y',
-    'date' => 'j F Y',
+    'day' => 'l, j F, Y',
+    'date' => 'F j, Y',
     'time' => 'g:i A',
 ];

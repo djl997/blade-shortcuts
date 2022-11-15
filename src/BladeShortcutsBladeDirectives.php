@@ -55,16 +55,16 @@ class BladeShortcutsBladeDirectives
         if(count($arr) === 2) {
             switch ($arr[1]) {
                 case "'dateOrDiff'":
-                    return "<?php if(!is_null($arr[0])) { if(\Carbon\Carbon::parse($arr[0])->diffInHours() > 23) { echo Carbon\Carbon::parse($arr[0])->translatedFormat(__('blade_directives::format.date')); } else { echo Carbon\Carbon::parse($arr[0])->diffForHumans(['options' => Carbon\Carbon::ONE_DAY_WORDS]); } } else { echo ''; } ?>";
+                    return "<?php if(!empty($arr[0])) { if(\Carbon\Carbon::parse($arr[0])->diffInHours() > 23) { echo Carbon\Carbon::parse($arr[0])->translatedFormat(__('blade_directives::format.date')); } else { echo Carbon\Carbon::parse($arr[0])->diffForHumans(['options' => Carbon\Carbon::ONE_DAY_WORDS]); } } else { echo ''; } ?>";
                     break;
 
                 default:
-                    return "<?php echo is_null($expression) ? '' : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); ?>";
+                    return "<?php echo empty($expression) ? '' : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); ?>";
                     break;
             }
         }
 
-        return "<?php echo is_null($expression) ? '' : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); ?>";
+        return "<?php echo empty($expression) ? '' : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); ?>";
     }
 
 }
