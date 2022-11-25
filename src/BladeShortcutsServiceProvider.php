@@ -16,9 +16,21 @@ class BladeShortcutsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'blade_directives');
+        
+        Blade::directive('appname', function (): string {
+            return BladeShortcutsDirectives::config('app.name');
+        });
+
+        Blade::directive('asset', function ($expression): string {
+            return BladeShortcutsDirectives::asset($expression);
+        });
 
         Blade::directive('boolean', function ($value): string {
             return BladeShortcutsDirectives::boolean($value);
+        });
+
+        Blade::directive('config', function ($expression): string {
+            return BladeShortcutsDirectives::config($expression);
         });
 
         Blade::directive('filesize', function ($expression): string {

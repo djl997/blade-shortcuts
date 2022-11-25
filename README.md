@@ -18,10 +18,20 @@ composer require djl997/blade-shortcuts
 ## Usage
 After installation all blade directives should be usable. Try running `php artisan view:clear` if the directives are not working properly or if they are not updating. 
 
+### App Name
+```blade
+@appname <!-- Laravel, default APP_NAME in .env file -->
+```
+
 ### Boolean
 ```blade
 @boolean(true) <!-- true -->
 @boolean(false) <!-- false -->
+```
+
+### Config
+```
+@config('config-file.key') <!-- anything -->
 ```
 
 ### Date
