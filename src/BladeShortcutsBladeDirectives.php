@@ -96,4 +96,12 @@ class BladeShortcutsBladeDirectives
         }        
     }
 
+    // TODO: datetime
+    // TODO: time
+    // TODO: month
+    // TODO: day
+    // TODO: carbon ($value, $format)
+
+    // TODO: html attributes @attributes(['class'=>'bg-blue-400' value => 'I didnt type this']) --> class="bg-blue-400" value="I didnt type this"
+
 }

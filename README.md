@@ -30,9 +30,10 @@ After installation all blade directives should be usable. Try running `php artis
 ```
 
 ### Config
-```
+```blade
 @config('config-file.key') <!-- anything -->
 ```
+
 
 ### Date
 Automatically translate dates in the correct localized format (currently only EN, NL, DE supported):
@@ -63,6 +64,10 @@ Other options:
 @filesizemb(124588) <!-- <1 MB -->
 @filesizegb(1198466000) <!-- 1,1 GB -->
 ```
+
+## Changelog
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
 ## Contributing
 
 Contributions are welcome.

@@ -1,5 +1,7 @@
 {
     "name": "djl997/blade-shortcuts",
+    "description": "Blade Shortcuts is a library of handy Laravel Blade Directives.",
+	"keywords": ["laravel","laravel-blade","blade-directives", "laravel-directives", "blade"],
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
