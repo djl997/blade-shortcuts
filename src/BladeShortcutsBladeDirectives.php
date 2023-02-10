@@ -38,7 +38,9 @@ class BladeShortcutsBladeDirectives
      */
     public function config(string $expression): string
     {
-        if(is_array(config(Parser::stripQuotes($expression)))) {
+        $expression = Parser::stripQuotes($expression);
+
+        if(is_array(config($expression))) {
             return "<?= json_encode(config('$expression')) ?>";
         } else {
             return "<?= config('$expression') ?>";
