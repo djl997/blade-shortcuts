@@ -33,6 +33,10 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::config($expression);
         });
 
+        Blade::directive('date', function ($expression): string {
+            return BladeShortcutsDirectives::date($expression);
+        });
+
         Blade::directive('filesize', function ($expression): string {
             return BladeShortcutsDirectives::filesize($expression);
         });
@@ -43,8 +47,8 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::filesize($expression, 'GB');
         });
 
-        Blade::directive('date', function ($expression): string {
-            return BladeShortcutsDirectives::date($expression);
+        Blade::directive('percentage', function ($expression): string {
+            return BladeShortcutsDirectives::percentage($expression);
         });
     }
 

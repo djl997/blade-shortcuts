@@ -98,6 +98,12 @@ class BladeShortcutsBladeDirectives
         }        
     }
 
+    public function percentage(string $value): string
+    {
+        return "<?php echo (floatval($value) < 1 ? floatval($value) * 100 : floatval($value)) . '%'; ?>";
+    }
+
+
     // TODO: datetime
     // TODO: time
     // TODO: month

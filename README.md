@@ -65,6 +65,16 @@ Other options:
 @filesizegb(1198466000) <!-- 1,1 GB -->
 ```
 
+### Percentage
+```blade
+@percentage(1) <!-- 100% -->
+@percentage(0.055) <!-- 5.5% -->
+@percentage(100) <!-- 100% -->
+@percentage(50) <!-- 50% -->
+@percentage(0.5) <!-- 50% -->
+@percentage(0.505) <!-- 50.5% -->
+```
+
 ## Changelog
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
