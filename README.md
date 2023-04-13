@@ -65,6 +65,20 @@ Other options:
 @filesizegb(1198466000) <!-- 1,1 GB -->
 ```
 
+### Inverse of @empty, Not empty
+```blade
+@notEmpty(1)
+I'm not empty.
+@endNotEmpty
+```
+
+### Inverse of @isset, Not isset
+```blade
+@notIsset($notSetVariable)
+I'm not set.
+@endNotIsset
+```
+
 ### Percentage
 ```blade
 @percentage(1) <!-- 100% -->

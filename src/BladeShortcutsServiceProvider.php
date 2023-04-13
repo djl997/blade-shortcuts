@@ -47,6 +47,20 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::filesize($expression, 'GB');
         });
 
+        Blade::directive('notEmpty', function ($expression): string {
+            return BladeShortcutsDirectives::notEmpty($expression);
+        });
+        Blade::directive('endNotEmpty', function (): string {
+            return BladeShortcutsDirectives::end();
+        });
+
+        Blade::directive('notIsset', function ($expression): string {
+            return BladeShortcutsDirectives::notIsset($expression);
+        });
+        Blade::directive('endNotIsset', function (): string {
+            return BladeShortcutsDirectives::end();
+        });
+
         Blade::directive('percentage', function ($expression): string {
             return BladeShortcutsDirectives::percentage($expression);
         });

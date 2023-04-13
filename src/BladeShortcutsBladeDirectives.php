@@ -98,18 +98,31 @@ class BladeShortcutsBladeDirectives
         }        
     }
 
+    public function notEmpty(string $value): string
+    {
+        return "<?php if(!empty($value)): ?>";
+    }
+
+    public function notIsset(string $value): string
+    {
+        return "<?php if(!isset($value)): ?>";
+    }
+
     public function percentage(string $value): string
     {
         return "<?php echo (floatval($value) <= 1 ? floatval($value) * 100 : floatval($value)) . '%'; ?>";
     }
 
+    public function end()
+    {
+        return "<?php endif; ?>";
+    }
 
     // TODO: datetime
     // TODO: time
     // TODO: month
     // TODO: day
     // TODO: carbon ($value, $format)
-
     // TODO: html attributes @attributes(['class'=>'bg-blue-400' value => 'I didnt type this']) --> class="bg-blue-400" value="I didnt type this"
 
 }
