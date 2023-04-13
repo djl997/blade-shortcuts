@@ -97,7 +97,7 @@ Or try shortcuts for datetime, time, year, month or day (also in the correct loc
 ```
 
 ## Changelog
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [GitHubs releases section](https://github.com/djl997/blade-shortcuts/releases) for more information on what has changed recently.
 
 ## Contributing
 
