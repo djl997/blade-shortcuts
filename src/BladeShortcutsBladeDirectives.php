@@ -9,8 +9,6 @@ class BladeShortcutsBladeDirectives
      * Boolean directive
      * 
      * @param  string  $value  boolean value (TRUE "1", "true", "on" and "yes", FALSE "0", "false", "off" and "no")
-     *
-     * @return string
      */
     public function asset(string $url): string
     {
@@ -21,8 +19,6 @@ class BladeShortcutsBladeDirectives
      * Boolean directive
      * 
      * @param  string  $value  boolean value (TRUE "1", "true", "on" and "yes", FALSE "0", "false", "off" and "no")
-     *
-     * @return string
      */
     public function boolean(string $value): string
     {
@@ -30,11 +26,33 @@ class BladeShortcutsBladeDirectives
     }
 
     /**
+     * Convert any date or time supported by the carbon package. 
+     * 
+     * @param  $expression  containing two arguments: 1. date or time, 2. format
+     * 
+     * @return string  
+     */
+    public function carbon(string $expression): string
+    {
+        $arr = Parser::multipleArgs($expression);
+
+        $return = "<?php echo empty($arr[0]) ? '' : ";
+        $return .= "\Carbon\Carbon::parse($arr[0])";
+
+        if(isset($arr[1])) {
+            $arr[1] = Parser::stripQuotes($arr[1]);
+            $return .= "->translatedFormat('$arr[1]')";
+        }
+
+        $return .= "; ?>";
+
+        return $return;        
+    }
+
+    /**
      * Config directive
      * 
      * @param  string  $value  key of config file
-     *
-     * @return string
      */
     public function config(string $expression): string
     {
@@ -51,10 +69,8 @@ class BladeShortcutsBladeDirectives
      * Local formatted date directive
      * 
      * @param  string  $value  
-     *
-     * @return string
      */
-    public function date(string $expression)
+    public function date(string $expression): string
     {
         $arr = Parser::multipleArgs($expression);
             
@@ -74,12 +90,60 @@ class BladeShortcutsBladeDirectives
     }
 
     /**
+     * Convert date to local format of date and time
+     * 
+     * @param  string  $date  
+     */
+    public function datetime(string $date): string 
+    {
+        return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.datetime')); ?>";
+    }
+
+    /**
+     * Convert date to localized month (full)
+     * 
+     * @param  string  $date  
+     */
+    public function year(string $date): string 
+    {
+        return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.year')); ?>";
+    }
+
+    /**
+     * Convert date to localized month (full)
+     * 
+     * @param  string  $date  
+     */
+    public function month(string $date): string 
+    {
+        return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.month')); ?>";
+    }
+
+    /**
+     * Convert date to localized day
+     * 
+     * @param  string  $date  
+     */
+    public function day(string $date): string 
+    {
+        return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.day')); ?>";
+    }
+
+    /**
+     * Convert date to local timeformat
+     * 
+     * @param  string  $date  
+     */
+    public function time(string $date): string 
+    {
+        return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.time')); ?>";
+    }
+
+    /**
      * Filesize directive
      * 
      * @param  string  $value  bytes amount to convert
      * @param  string  $size   choose filesize to convert the bytes to, default will fallback to kB
-     *
-     * @return string
      */
     public function filesize(string $value, string $size = 'kB'): string
     {
@@ -138,16 +202,9 @@ class BladeShortcutsBladeDirectives
      * 
      * @return string
      */
-    public function end()
+    public function end(): string
     {
         return "<?php endif; ?>";
     }
-
-    // TODO: datetime
-    // TODO: time
-    // TODO: month
-    // TODO: day
-    // TODO: carbon ($value, $format)
-    // TODO: html attributes @attributes(['class'=>'bg-blue-400' value => 'I didnt type this']) --> class="bg-blue-400" value="I didnt type this"
 
 }

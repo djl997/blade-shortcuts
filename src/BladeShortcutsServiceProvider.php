@@ -17,26 +17,54 @@ class BladeShortcutsServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'blade_directives');
         
+        /**
+         * Config
+         */
         Blade::directive('appname', function (): string {
             return BladeShortcutsDirectives::config('app.name');
         });
-
-        Blade::directive('asset', function ($expression): string {
-            return BladeShortcutsDirectives::asset($expression);
-        });
-
-        Blade::directive('boolean', function ($value): string {
-            return BladeShortcutsDirectives::boolean($value);
-        });
-
         Blade::directive('config', function ($expression): string {
             return BladeShortcutsDirectives::config($expression);
         });
 
+        /**
+         * Filesizes
+         */
+        Blade::directive('asset', function ($expression): string {
+            return BladeShortcutsDirectives::asset($expression);
+        });
+        Blade::directive('boolean', function ($value): string {
+            return BladeShortcutsDirectives::boolean($value);
+        });
+
+        /**
+         * Dates
+         */
+        Blade::directive('carbon', function ($expression): string {
+            return BladeShortcutsDirectives::carbon($expression);
+        });
         Blade::directive('date', function ($expression): string {
             return BladeShortcutsDirectives::date($expression);
         });
+        Blade::directive('datetime', function ($expression): string {
+            return BladeShortcutsDirectives::datetime($expression);
+        });
+        Blade::directive('year', function ($expression): string {
+            return BladeShortcutsDirectives::year($expression);
+        });
+        Blade::directive('month', function ($expression): string {
+            return BladeShortcutsDirectives::month($expression);
+        });
+        Blade::directive('day', function ($expression): string {
+            return BladeShortcutsDirectives::day($expression);
+        });
+        Blade::directive('time', function ($expression): string {
+            return BladeShortcutsDirectives::time($expression);
+        });
 
+        /**
+         * Filesizes
+         */
         Blade::directive('filesize', function ($expression): string {
             return BladeShortcutsDirectives::filesize($expression);
         });
@@ -47,6 +75,9 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::filesize($expression, 'GB');
         });
 
+        /**
+         * Extensions to vanilla directives
+         */
         Blade::directive('notEmpty', function ($expression): string {
             return BladeShortcutsDirectives::notEmpty($expression);
         });
@@ -61,6 +92,9 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::end();
         });
 
+        /**
+         * Financial
+         */
         Blade::directive('percentage', function ($expression): string {
             return BladeShortcutsDirectives::percentage($expression);
         });

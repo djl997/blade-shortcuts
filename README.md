@@ -35,7 +35,7 @@ After installation all blade directives should be usable. Try running `php artis
 ```
 
 
-### Date
+### Dates
 Automatically translate dates in the correct localized format (currently only EN, NL, DE supported):
 - EN: November 8, 2022
 - NL: 8 november 2022
@@ -52,10 +52,16 @@ Other options:
 @date(now()->subHours(20), 'dateOrDiff') <!-- 20 hours ago -->
 @date(now()->subWeek()) <!-- November 8, 2022 -->
 @date(now()->subWeek(), 'dateOrDiff') <!-- November 8, 2022 -->
+```
 
-@date(null)
-@date('')
-@date(0)
+Or try shortcuts for datetime, time, year, month or day (also in the correct localized format):
+```blade
+@datetime(now()) <!-- November 8, 2022 3:04 PM -->
+@time(now()) <!-- 3:04 PM -->
+
+@year(now()) <!-- 2022 -->
+@month(now()) <!-- November -->
+@day(now()) <!-- Tuesday -->
 ```
 
 ### Filesize
@@ -65,21 +71,21 @@ Other options:
 @filesizegb(1198466000) <!-- 1,1 GB -->
 ```
 
-### Inverse of @empty, Not empty
+### Not Empty, inverse of @empty
 ```blade
 @notEmpty(1)
-I'm not empty.
+    I'm not empty.
 @endNotEmpty
 ```
 
-### Inverse of @isset, Not isset
+### Not Isset, inverse of @isset
 ```blade
 @notIsset($notSetVariable)
-I'm not set.
+    I'm not set.
 @endNotIsset
 ```
 
-### Percentage
+### Percentages
 ```blade
 @percentage(1) <!-- 100% -->
 @percentage(0.055) <!-- 5.5% -->
