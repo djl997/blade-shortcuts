@@ -73,6 +73,7 @@ Other options:
 @percentage(50) <!-- 50% -->
 @percentage(0.5) <!-- 50% -->
 @percentage(0.505) <!-- 50.5% -->
+@percentage(-5) <!-- -5% -->
 ```
 
 ## Changelog
