@@ -98,21 +98,46 @@ class BladeShortcutsBladeDirectives
         }        
     }
 
+    /**
+     * Inverse directive of vanilla @empty directive
+     * 
+     * @param  string  $value  bytes amount to convert
+     * 
+     * @return string
+     */
     public function notEmpty(string $value): string
     {
         return "<?php if(!empty($value)): ?>";
     }
 
+    /**
+     * Inverse directive of vanilla @isset directive
+     * 
+     * @param  string  $value  bytes amount to convert
+     * 
+     * @return string
+     */
     public function notIsset(string $value): string
     {
         return "<?php if(!isset($value)): ?>";
     }
 
+    /**
+     * 
+     * @param  string  $value  value to be converted to percentages. Note! If you are converting non-floats, values equal or less than 1 will be multiplied by 100
+     * 
+     * @return string
+     */
     public function percentage(string $value): string
     {
         return "<?php echo (floatval($value) <= 1 ? floatval($value) * 100 : floatval($value)) . '%'; ?>";
     }
 
+    /**
+     * End if
+     * 
+     * @return string
+     */
     public function end()
     {
         return "<?php endif; ?>";
