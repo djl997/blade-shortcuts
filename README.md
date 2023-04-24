@@ -16,7 +16,7 @@ composer require djl997/blade-shortcuts
 ```
 
 ## Usage
-After installation all blade directives should be usable. Try running `php artisan view:clear` if the directives are not working properly or if they are not updating. 
+After installation, all directives should be usable immediately. If you experience problems on first use or after updating the package, try running `php artisan view:clear`. 
 
 ### App Name
 ```blade
