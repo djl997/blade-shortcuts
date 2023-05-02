@@ -98,6 +98,16 @@ class BladeShortcutsServiceProvider extends ServiceProvider
         Blade::directive('percentage', function ($expression): string {
             return BladeShortcutsDirectives::percentage($expression);
         });
+
+        /**
+         * Helpers
+         */
+        Blade::directive('str', function ($expression): string {
+            return BladeShortcutsDirectives::str($expression);
+        });
+        Blade::directive('arr', function ($expression): string {
+            return BladeShortcutsDirectives::arr($expression);
+        });
     }
 
     /**

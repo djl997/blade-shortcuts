@@ -4,7 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/djl997/blade-shortcuts.svg?style=flat-square)](https://packagist.org/packages/djl997/blade-shortcuts)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-Blade Shortcuts is a library of handy Blade Directives as listed below.
+Blade Shortcuts is a library of handy Blade Directives as listed below. The goal is to have less repetitive (base) logic in views, shorter code and/or better readability.
 
 ## Requirements
 Blade Shortcuts requires PHP 8+ and Laravel 6+.
@@ -17,6 +17,26 @@ composer require djl997/blade-shortcuts
 
 ## Usage
 After installation, all directives should be usable immediately. If you experience problems on first use or after updating the package, try running `php artisan view:clear`. 
+
+## All directives
+- [App Name](#app-name)
+- [Boolean](#boolean)
+- [Config](#config)
+
+- [Dates](#dates)
+    - date
+    - datetime
+    - time
+    - year
+    - month
+    - day
+- [Filesizes](#filesize)
+- [Not empty](#not-empty-inverse-of-empty)
+- [Not isset](#not-isset-inverse-of-isset)
+- [Percentage](#percentage)
+- Helpers
+    - [Arrays](#arrays)
+    - [Fluent Strings](#fluent-strings)
 
 ### App Name
 ```blade
@@ -95,6 +115,36 @@ Or try shortcuts for datetime, time, year, month or day (also in the correct loc
 @percentage(0.505) <!-- 50.5% -->
 @percentage(-5) <!-- -5% -->
 ```
+
+## Helpers
+
+### Arrays
+```blade
+<?php $array = ['Tailwind', 'Alpine', 'Laravel', 'Livewire']; ?>
+
+<!-- Before -->
+{{ Illuminate\Support\Arr::join($array, ', ', ' and ') }}
+
+<!-- After -->
+@arr(join($array, ', ', ' and '))  
+
+<!-- Result -->
+Tailwind, Alpine, Laravel and Livewire
+```
+Find all available methods in [Laravel Docs](https://laravel.com/docs/10.x/helpers#arrays-and-objects-method-list).
+
+### Fluent strings
+```blade
+<!-- Before -->
+{{ Illuminate\Support\Str::of('    laravel    framework    ')->squish() }}
+
+<!-- After -->
+@str(of('    laravel    framework    ')->squish())  
+
+<!-- Result  -->
+laravel framework
+```
+Find all available methods in [Laravel Docs](https://laravel.com/docs/10.x/helpers#fluent-strings-method-list).
 
 ## Changelog
 Please see [GitHubs releases section](https://github.com/djl997/blade-shortcuts/releases) for more information on what has changed recently.

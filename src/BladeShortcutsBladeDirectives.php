@@ -1,6 +1,7 @@
 <?php
 
 namespace Djl997\BladeShortcuts;
+use Illuminate\Support\Str;
 
 class BladeShortcutsBladeDirectives
 {
@@ -205,6 +206,23 @@ class BladeShortcutsBladeDirectives
     public function end(): string
     {
         return "<?php endif; ?>";
+    }
+
+
+    /**
+     * Fluent strings helper
+     */
+    public function str($expression): string
+    {
+        return "<?php echo Illuminate\Support\Str::$expression; ?>";
+    }
+
+    /**
+     * Arrays helper
+     */
+    public function arr($expression): string
+    {
+        return "<?php echo Illuminate\Support\Arr::$expression; ?>";
     }
 
 }
