@@ -16,6 +16,10 @@ class BladeShortcutsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'blade_directives');
+
+        $this->publishes([
+            __DIR__.'/../config/blade-shortcuts.php' => config_path('blade-shortcuts.php'),
+        ], 'blade-shortcuts-config');
         
         /**
          * Config
@@ -117,6 +121,8 @@ class BladeShortcutsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // ..
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/blade-shortcuts.php', 'blade-shortcuts'
+        );
     }
 }

@@ -4,25 +4,24 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/djl997/blade-shortcuts.svg?style=flat-square)](https://packagist.org/packages/djl997/blade-shortcuts)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-Blade Shortcuts is a library of handy Blade Directives as listed below. The goal is to have less repetitive (base) logic in views, shorter code and/or better readability.
+Blade Shortcuts is a library of clever Blade Directives as listed below. The goal is to have less repetitive (base) logic in your Blade Views, overall shorter code and better readability.
 
 ## Requirements
 Blade Shortcuts requires PHP 8+ and Laravel 6+.
 
 ## Installation
 You can install the package via composer:
-```bash
+```sh
 composer require djl997/blade-shortcuts
 ```
 
 ## Usage
-After installation, all directives should be usable immediately. If you experience problems on first use or after updating the package, try running `php artisan view:clear`. 
+After installation, all directives should be usable immediately. If something goes wrong at first use or after an update, `php artisan view:clear` should clear the issue. 
 
-## All directives
+## Contents
 - [App Name](#app-name)
 - [Boolean](#boolean)
 - [Config](#config)
-
 - [Dates](#dates)
     - date
     - datetime
@@ -73,8 +72,9 @@ Other options:
 @date(now()->subWeek()) <!-- November 8, 2022 -->
 @date(now()->subWeek(), 'dateOrDiff') <!-- November 8, 2022 -->
 ```
+> If the time difference is more than 23 hours, ‘dateOrDiff’ will automatically show the date in a localized format instead of ‘x time ago’ or ‘in x time’. You can adjust this threshold in the config file: `php artisan vendor:publish --tag=blade-shortcuts-config`. 
 
-Or try shortcuts for datetime, time, year, month or day (also in the correct localized format):
+Try shortcuts for datetime, time, year, month or day (also in the correct localized format):
 ```blade
 @datetime(now()) <!-- November 8, 2022 3:04 PM -->
 @time(now()) <!-- 3:04 PM -->
@@ -145,6 +145,11 @@ Find all available methods in [Laravel Docs](https://laravel.com/docs/10.x/helpe
 laravel framework
 ```
 Find all available methods in [Laravel Docs](https://laravel.com/docs/10.x/helpers#fluent-strings-method-list).
+
+## Publish config
+```sh
+php artisan vendor:publish --tag=blade-shortcuts-config
+```
 
 ## Changelog
 Please see [GitHubs releases section](https://github.com/djl997/blade-shortcuts/releases) for more information on what has changed recently.
