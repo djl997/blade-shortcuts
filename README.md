@@ -76,12 +76,18 @@ Other options:
 
 Try shortcuts for datetime, time, year, month or day (also in the correct localized format):
 ```blade
-@datetime(now()) <!-- November 8, 2022 3:04 PM -->
-@time(now()) <!-- 3:04 PM -->
+@datetime <!-- November 8, 2022 3:04 PM -->
+@time <!-- 3:04 PM -->
 
-@year(now()) <!-- 2022 -->
-@month(now()) <!-- November -->
-@day(now()) <!-- Tuesday -->
+@year <!-- 2022 -->
+@month <!-- November -->
+@day <!-- Tuesday -->
+```
+
+You even can add a custom date to datetime, time, year, month or day, for example:
+```blade
+@day(now())
+@year('2022-11-08')
 ```
 
 ### Filesize

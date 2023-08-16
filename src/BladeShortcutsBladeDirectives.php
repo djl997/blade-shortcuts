@@ -97,6 +97,9 @@ class BladeShortcutsBladeDirectives
      */
     public function datetime(string $date): string 
     {
+        if(empty($date))
+            $date = 'null';
+
         return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.datetime')); ?>";
     }
 
@@ -107,6 +110,9 @@ class BladeShortcutsBladeDirectives
      */
     public function year(string $date): string 
     {
+        if(empty($date))
+            $date = 'null';
+
         return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.year')); ?>";
     }
 
@@ -117,6 +123,9 @@ class BladeShortcutsBladeDirectives
      */
     public function month(string $date): string 
     {
+        if(empty($date))
+            $date = 'null';
+
         return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.month')); ?>";
     }
 
@@ -127,6 +136,9 @@ class BladeShortcutsBladeDirectives
      */
     public function day(string $date): string 
     {
+        if(empty($date))
+            $date = 'null';
+
         return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.day')); ?>";
     }
 
@@ -137,6 +149,9 @@ class BladeShortcutsBladeDirectives
      */
     public function time(string $date): string 
     {
+        if(empty($date))
+            $date = 'null';
+
         return "<?php echo empty($date) ? '' : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.time')); ?>";
     }
 
