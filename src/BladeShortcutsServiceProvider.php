@@ -65,6 +65,9 @@ class BladeShortcutsServiceProvider extends ServiceProvider
         Blade::directive('time', function ($expression): string {
             return BladeShortcutsDirectives::time($expression);
         });
+        Blade::directive('readableMinutes', function ($expression): string {
+            return BladeShortcutsDirectives::readableMinutes($expression);
+        });
 
         /**
          * Filesizes

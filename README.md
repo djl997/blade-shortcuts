@@ -24,6 +24,7 @@ After installation, all directives should be usable immediately. If something go
 - [Config](#config)
 - [Dates](#dates)
     - date
+    - readableMinutes
     - datetime
     - time
     - year
@@ -78,6 +79,7 @@ Try shortcuts for datetime, time, year, month or day (also in the correct locali
 ```blade
 @datetime <!-- November 8, 2022 3:04 PM -->
 @time <!-- 3:04 PM -->
+@readableMinutes(125) <!-- 2h 5m -->
 
 @year <!-- 2022 -->
 @month <!-- November -->

@@ -159,6 +159,20 @@ class BladeShortcutsBladeDirectives
     }
 
     /**
+     * Convert minutes to a human readable format
+     * 
+     * @param string $minutes
+     * @param bool $short
+     * 
+     * @return string
+     */
+    public function readableMinutes(string $minutes, bool $short = true): string
+    {
+        return "<?php echo \Carbon\CarbonInterval::minutes($minutes)->cascade()->forHumans(['short' => $short]); ?>";
+    }
+     
+
+    /**
      * Filesize directive
      * 
      * @param  string  $value  bytes amount to convert
