@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/djl997/blade-shortcuts.svg?style=flat-square)](https://packagist.org/packages/djl997/blade-shortcuts)
 [![Total Downloads](https://img.shields.io/packagist/dt/djl997/blade-shortcuts.svg?style=flat-square)](https://packagist.org/packages/djl997/blade-shortcuts)
+![Build Status](https://img.shields.io/github/actions/workflow/status/djl997/blade-shortcuts/phpunit.yml?label=tests&style=flat-square&branch=main)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 Blade Shortcuts is a library of clever Blade Directives as listed below. The goal is to have less repetitive (base) logic in your Blade Views, overall shorter code and better readability.
@@ -29,7 +30,6 @@ After installation, all directives should be usable immediately. If something go
     - cascadeDays
     - cascadeWeeks
     - cascadeMonths
-    - cascadeYears
     - datetime
     - time
     - year
