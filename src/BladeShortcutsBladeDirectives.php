@@ -159,67 +159,14 @@ class BladeShortcutsBladeDirectives
         return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.time')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.time')); ?>";
     }
 
-    /**
-     * Cascade minutes to a human readable format
-     * 
-     * @param string $expression
-     * 
-     * @return string
-     */
-    public function cascadeMinutes($expression): string
-    {
-        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::minutes(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
-    }
-
-    /**
-     * Cascade hours to a human readable format
-     * 
-     * @param string $expression
-     * 
-     * @return string
-     */
-    public function cascadeHours($expression): string
-    {
-        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::hours(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
-    }
-
-    /**
-     * Cascade days to a human readable format
-     * 
-     * @param string $expression
-     * 
-     * @return string
-     */
-    public function cascadeDays($expression): string
-    {
-        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::days(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
-    }
-    
     /** 
-     * Cascade months to a human readable format
+     * Cascade timeUnit to a human readable format
      * 
      * @param string $expression
      * 
      * @return string
      */
-    public function cascadeMonths($expression): string
-    {
-        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::months(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
-    }
-
-    /** 
-     * Cascade years to a human readable format
-     * 
-     * @param string $expression
-     * 
-     * @return string
-     */
-    public function cascadeYears($expression): string
-    {
-        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::years(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
-    }
-
-    private function cascadeBase($expression, $code): string
+    public function cascade($expression, $timeUnit): string
     {
         return "<?php   
                 \$normal = [
@@ -245,7 +192,7 @@ class BladeShortcutsBladeDirectives
                     \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
                 }
                 \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
-                ".$code."
+                echo \Carbon\CarbonInterval::$timeUnit(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
                 \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
             ?>";
     }

@@ -65,23 +65,21 @@ class BladeShortcutsServiceProvider extends ServiceProvider
         Blade::directive('time', function ($expression): string {
             return BladeShortcutsDirectives::time($expression);
         });
-        Blade::directive('cascadeYears', function ($expression): string {
-            return BladeShortcutsDirectives::cascadeYears($expression);
-        });
+        
         Blade::directive('cascadeMonths', function ($expression): string {
-            return BladeShortcutsDirectives::cascadeMonths($expression);
+            return BladeShortcutsDirectives::cascade($expression, 'months');
         });
         Blade::directive('cascadeDays', function ($expression): string {
-            return BladeShortcutsDirectives::cascadeDays($expression);
+            return BladeShortcutsDirectives::cascade($expression, 'days');
         });
         Blade::directive('cascadeHours', function ($expression): string {
-            return BladeShortcutsDirectives::cascadeHours($expression);
+            return BladeShortcutsDirectives::cascade($expression, 'hours');
         });
         Blade::directive('cascadeMinutes', function ($expression): string {
-            return BladeShortcutsDirectives::cascadeMinutes($expression);
+            return BladeShortcutsDirectives::cascade($expression, 'minutes');
         });
         Blade::directive('cascadeSeconds', function ($expression): string {
-            return BladeShortcutsDirectives::cascadeSeconds($expression);
+            return BladeShortcutsDirectives::cascade($expression, 'seconds');
         });
 
 
