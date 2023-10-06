@@ -1,6 +1,7 @@
 <?php
 
 namespace Djl997\BladeShortcuts;
+
 use Illuminate\Support\Str;
 
 class BladeShortcutsBladeDirectives
@@ -40,14 +41,14 @@ class BladeShortcutsBladeDirectives
         $return = "<?php echo empty($arr[0]) ? '' : ";
         $return .= "\Carbon\Carbon::parse($arr[0])";
 
-        if(isset($arr[1])) {
+        if (isset($arr[1])) {
             $arr[1] = Parser::stripQuotes($arr[1]);
             $return .= "->translatedFormat('$arr[1]')";
         }
 
         $return .= "; ?>";
 
-        return $return;        
+        return $return;
     }
 
     /**
@@ -59,7 +60,7 @@ class BladeShortcutsBladeDirectives
     {
         $expression = Parser::stripQuotes($expression);
 
-        if(is_array(config($expression))) {
+        if (is_array(config($expression))) {
             return "<?= json_encode(config('$expression')) ?>";
         } else {
             return "<?= config('$expression') ?>";
@@ -75,10 +76,10 @@ class BladeShortcutsBladeDirectives
     {
         $arr = Parser::multipleArgs($expression);
 
-        if(empty($expression))
+        if (empty($expression))
             $expression = 'null';
-            
-        if(count($arr) === 2) {
+
+        if (count($arr) === 2) {
             switch ($arr[1]) {
                 case "'dateOrDiff'":
                     return "<?php if(!empty($arr[0])) { if(\Carbon\Carbon::parse($arr[0])->diffInHours() > config('blade-shortcuts.dateOrDiff')) { echo Carbon\Carbon::parse($arr[0])->translatedFormat(__('blade_directives::format.date')); } else { echo Carbon\Carbon::parse($arr[0])->diffForHumans(['options' => Carbon\Carbon::ONE_DAY_WORDS]); } } else { echo ''; } ?>";
@@ -98,9 +99,9 @@ class BladeShortcutsBladeDirectives
      * 
      * @param  string  $date  
      */
-    public function datetime(string $date): string 
+    public function datetime(string $date): string
     {
-        if(empty($date))
+        if (empty($date))
             $date = 'null';
 
         return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.datetime')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.datetime')); ?>";
@@ -111,9 +112,9 @@ class BladeShortcutsBladeDirectives
      * 
      * @param  string  $date  
      */
-    public function year(string $date): string 
+    public function year(string $date): string
     {
-        if(empty($date))
+        if (empty($date))
             $date = 'null';
 
         return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.year')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.year')); ?>";
@@ -124,9 +125,9 @@ class BladeShortcutsBladeDirectives
      * 
      * @param  string  $date  
      */
-    public function month(string $date): string 
+    public function month(string $date): string
     {
-        if(empty($date))
+        if (empty($date))
             $date = 'null';
 
         return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.month')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.month')); ?>";
@@ -137,9 +138,9 @@ class BladeShortcutsBladeDirectives
      * 
      * @param  string  $date  
      */
-    public function day(string $date): string 
+    public function day(string $date): string
     {
-        if(empty($date))
+        if (empty($date))
             $date = 'null';
 
         return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.day')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.day')); ?>";
@@ -150,27 +151,205 @@ class BladeShortcutsBladeDirectives
      * 
      * @param  string  $date  
      */
-    public function time(string $date): string 
+    public function time(string $date): string
     {
-        if(empty($date))
+        if (empty($date))
             $date = 'null';
 
         return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.time')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.time')); ?>";
     }
 
     /**
-     * Convert minutes to a human readable format
+     * Cascade minutes to a human readable format
      * 
-     * @param string $minutes
-     * @param bool $short
+     * @param string $expression
      * 
      * @return string
      */
-    public function readableMinutes(string $minutes, bool $short = true): string
+    public function cascadeMinutes($expression): string
     {
-        return "<?php echo \Carbon\CarbonInterval::minutes($minutes)->cascade()->forHumans(['short' => $short]); ?>";
+        return "<?php   
+                \$normal = [
+                    'year' => 'months',
+                    'month' => 'days',
+                    'week' => 'days',
+                    'day' => 'hours',
+                    'hour' => 'minutes',
+                    'minute' => 'seconds',
+                ]; 
+                \$expression = collect(($expression))->map(function (\$item) {
+                    if(is_array(\$item)) {
+                        return \$item;
+                    }
+                    return trim(\$item, \"'\");
+                })->toArray();
+                if(!isset(\$expression[1])) {
+                    \$expression[1] = [];
+                }
+                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
+                \$newfactors = [];
+                foreach (\$expression[1] as \$key => \$value) {
+                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
+                }
+                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
+                echo \Carbon\CarbonInterval::minutes(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
+                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
+            ?>";
     }
-     
+
+    /**
+     * Cascade hours to a human readable format
+     * 
+     * @param string $expression
+     * 
+     * @return string
+     */
+    public function cascadeHours($expression): string
+    {
+        return "<?php   
+                \$normal = [
+                    'year' => 'months',
+                    'month' => 'days',
+                    'week' => 'days',
+                    'day' => 'hours',
+                    'hour' => 'minutes',
+                    'minute' => 'seconds',
+                ]; 
+                \$expression = collect(($expression))->map(function (\$item) {
+                    if(is_array(\$item)) {
+                        return \$item;
+                    }
+                    return trim(\$item, \"'\");
+                })->toArray();
+                if(!isset(\$expression[1])) {
+                    \$expression[1] = [];
+                }
+                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
+                \$newfactors = [];
+                foreach (\$expression[1] as \$key => \$value) {
+                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
+                }
+                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
+                echo \Carbon\CarbonInterval::hours(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
+                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
+            ?>";
+    }
+
+    /**
+     * Cascade days to a human readable format
+     * 
+     * @param string $expression
+     * 
+     * @return string
+     */
+    public function cascadeDays($expression): string
+    {
+        return "<?php   
+                \$normal = [
+                    'year' => 'months',
+                    'month' => 'days',
+                    'week' => 'days',
+                    'day' => 'hours',
+                    'hour' => 'minutes',
+                    'minute' => 'seconds',
+                ]; 
+                \$expression = collect(($expression))->map(function (\$item) {
+                    if(is_array(\$item)) {
+                        return \$item;
+                    }
+                    return trim(\$item, \"'\");
+                })->toArray();
+                if(!isset(\$expression[1])) {
+                    \$expression[1] = [];
+                }
+                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
+                \$newfactors = [];
+                foreach (\$expression[1] as \$key => \$value) {
+                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
+                }
+                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
+                echo \Carbon\CarbonInterval::days(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
+                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
+            ?>";
+    }
+    
+    /** 
+     * Cascade months to a human readable format
+     * 
+     * @param string $expression
+     * 
+     * @return string
+     */
+    public function cascadeMonths($expression): string
+    {
+        return "<?php   
+                \$normal = [
+                    'year' => 'months',
+                    'month' => 'days',
+                    'week' => 'days',
+                    'day' => 'hours',
+                    'hour' => 'minutes',
+                    'minute' => 'seconds',
+                ]; 
+                \$expression = collect(($expression))->map(function (\$item) {
+                    if(is_array(\$item)) {
+                        return \$item;
+                    }
+                    return trim(\$item, \"'\");
+                })->toArray();
+                if(!isset(\$expression[1])) {
+                    \$expression[1] = [];
+                }
+                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
+                \$newfactors = [];
+                foreach (\$expression[1] as \$key => \$value) {
+                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
+                }
+                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
+                echo \Carbon\CarbonInterval::months(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
+                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
+            ?>";
+    }
+
+    /** 
+     * Cascade years to a human readable format
+     * 
+     * @param string $expression
+     * 
+     * @return string
+     */
+    public function cascadeYears($expression): string
+    {
+        return "<?php   
+                \$normal = [
+                    'year' => 'months',
+                    'month' => 'days',
+                    'week' => 'days',
+                    'day' => 'hours',
+                    'hour' => 'minutes',
+                    'minute' => 'seconds',
+                ]; 
+                \$expression = collect(($expression))->map(function (\$item) {
+                    if(is_array(\$item)) {
+                        return \$item;
+                    }
+                    return trim(\$item, \"'\");
+                })->toArray();
+                if(!isset(\$expression[1])) {
+                    \$expression[1] = [];
+                }
+                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
+                \$newfactors = [];
+                foreach (\$expression[1] as \$key => \$value) {
+                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
+                }
+                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
+                echo \Carbon\CarbonInterval::years(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
+                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
+            ?>";
+    }
+
+
 
     /**
      * Filesize directive
@@ -188,11 +367,11 @@ class BladeShortcutsBladeDirectives
             case 'GB':
                 return "<?php echo number_format($value/ 1073741824, 1, ',', '.') . ' GB'; ?>";
                 break;
-            
+
             default:
                 return "<?php echo number_format($value/ 1024, 0, ',', '.') . ' kB'; ?>";
                 break;
-        }        
+        }
     }
 
     /**
@@ -256,5 +435,4 @@ class BladeShortcutsBladeDirectives
     {
         return "<?php echo Illuminate\Support\Arr::$expression; ?>";
     }
-
 }

@@ -79,7 +79,9 @@ Try shortcuts for datetime, time, year, month or day (also in the correct locali
 ```blade
 @datetime <!-- November 8, 2022 3:04 PM -->
 @time <!-- 3:04 PM -->
-@readableMinutes(125) <!-- 2h 5m -->
+@cascadeMinutes(125) <!-- 2h 5m -->
+@cascadeMinutes([125, ['hour' => 30, 'day' => 1]]) <!-- 4d 5min -->
+@cascadeDays(125) <!-- 4d 5h -->
 
 @year <!-- 2022 -->
 @month <!-- November -->
