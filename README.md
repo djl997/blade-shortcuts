@@ -24,7 +24,12 @@ After installation, all directives should be usable immediately. If something go
 - [Config](#config)
 - [Dates](#dates)
     - date
-    - readableMinutes
+    - cascadeMinutes
+    - cascadeHours
+    - cascadeDays
+    - cascadeWeeks
+    - cascadeMonths
+    - cascadeYears
     - datetime
     - time
     - year
