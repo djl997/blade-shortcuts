@@ -1,6 +1,6 @@
 <?php
 
-namespace Djl996\Tests;
+namespace Djl997\Tests;
 
 class CascadeTest extends TestCase
 {

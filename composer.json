@@ -18,7 +18,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Djl996\\Tests\\": "tests"
+            "Djl997\\Tests\\": "tests"
         }
     },
     "require-dev": {
