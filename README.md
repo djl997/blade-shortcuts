@@ -25,16 +25,16 @@ After installation, all directives should be usable immediately. If something go
 - [Config](#config)
 - [Dates](#dates)
     - date
-    - cascadeMinutes
-    - cascadeHours
-    - cascadeDays
-    - cascadeWeeks
-    - cascadeMonths
     - datetime
     - time
     - year
     - month
     - day
+    - cascadeMinutes
+    - cascadeHours
+    - cascadeDays
+    - cascadeWeeks
+    - cascadeMonths
 - [Filesizes](#filesize)
 - [Not empty](#not-empty-inverse-of-empty)
 - [Not isset](#not-isset-inverse-of-isset)
@@ -84,10 +84,6 @@ Try shortcuts for datetime, time, year, month or day (also in the correct locali
 ```blade
 @datetime <!-- November 8, 2022 3:04 PM -->
 @time <!-- 3:04 PM -->
-@cascadeMinutes(125) <!-- 2h 5m -->
-@cascadeMinutes([125, ['hour' => 30, 'day' => 1]]) <!-- 4d 5min -->
-@cascadeDays(125) <!-- 4d 5h -->
-
 @year <!-- 2022 -->
 @month <!-- November -->
 @day <!-- Tuesday -->
@@ -97,6 +93,18 @@ You even can add a custom date to datetime, time, year, month or day, for exampl
 ```blade
 @day(now())
 @year('2022-11-08')
+```
+
+#### Cascades
+If you want to display a certain amount of time in human readable format, try out the new cascade directives. For example:
+```blade
+@cascadeFromMinutes(125) <!-- 2h 5m -->
+@cascadeFromHours(146) <!-- 6d 2h -->
+```
+
+Change the Carbon Interval. For example, if a company has 30 working hours available per day, how long will a project of 125 hours take?
+```blade
+@cascadeFromHours([125, ['day' => 30]]) <!-- 4d 5h -->
 ```
 
 ### Filesize
