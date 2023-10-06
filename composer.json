@@ -1,7 +1,13 @@
 {
     "name": "djl997/blade-shortcuts",
     "description": "Blade Shortcuts is a library of handy Laravel Blade Directives.",
-	"keywords": ["laravel","laravel-blade","blade-directives", "laravel-directives", "blade"],
+    "keywords": [
+        "laravel",
+        "laravel-blade",
+        "blade-directives",
+        "laravel-directives",
+        "blade"
+    ],
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -10,12 +16,23 @@
             "Djl997\\BladeShortcuts\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Djl996\\Tests\\": "tests"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.32"
+    },
     "authors": [
         {
             "name": "Dirk Jan",
             "email": "dirkjan@q2-software.nl"
         }
     ],
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "require": {
         "php": "^8.0",
         "nesbot/carbon": "^2.31",

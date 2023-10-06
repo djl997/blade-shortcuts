@@ -168,33 +168,7 @@ class BladeShortcutsBladeDirectives
      */
     public function cascadeMinutes($expression): string
     {
-        return "<?php   
-                \$normal = [
-                    'year' => 'months',
-                    'month' => 'days',
-                    'week' => 'days',
-                    'day' => 'hours',
-                    'hour' => 'minutes',
-                    'minute' => 'seconds',
-                ]; 
-                \$expression = collect(($expression))->map(function (\$item) {
-                    if(is_array(\$item)) {
-                        return \$item;
-                    }
-                    return trim(\$item, \"'\");
-                })->toArray();
-                if(!isset(\$expression[1])) {
-                    \$expression[1] = [];
-                }
-                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
-                \$newfactors = [];
-                foreach (\$expression[1] as \$key => \$value) {
-                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
-                }
-                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
-                echo \Carbon\CarbonInterval::minutes(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
-                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
-            ?>";
+        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::minutes(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
     }
 
     /**
@@ -206,33 +180,7 @@ class BladeShortcutsBladeDirectives
      */
     public function cascadeHours($expression): string
     {
-        return "<?php   
-                \$normal = [
-                    'year' => 'months',
-                    'month' => 'days',
-                    'week' => 'days',
-                    'day' => 'hours',
-                    'hour' => 'minutes',
-                    'minute' => 'seconds',
-                ]; 
-                \$expression = collect(($expression))->map(function (\$item) {
-                    if(is_array(\$item)) {
-                        return \$item;
-                    }
-                    return trim(\$item, \"'\");
-                })->toArray();
-                if(!isset(\$expression[1])) {
-                    \$expression[1] = [];
-                }
-                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
-                \$newfactors = [];
-                foreach (\$expression[1] as \$key => \$value) {
-                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
-                }
-                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
-                echo \Carbon\CarbonInterval::hours(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
-                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
-            ?>";
+        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::hours(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
     }
 
     /**
@@ -244,33 +192,7 @@ class BladeShortcutsBladeDirectives
      */
     public function cascadeDays($expression): string
     {
-        return "<?php   
-                \$normal = [
-                    'year' => 'months',
-                    'month' => 'days',
-                    'week' => 'days',
-                    'day' => 'hours',
-                    'hour' => 'minutes',
-                    'minute' => 'seconds',
-                ]; 
-                \$expression = collect(($expression))->map(function (\$item) {
-                    if(is_array(\$item)) {
-                        return \$item;
-                    }
-                    return trim(\$item, \"'\");
-                })->toArray();
-                if(!isset(\$expression[1])) {
-                    \$expression[1] = [];
-                }
-                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
-                \$newfactors = [];
-                foreach (\$expression[1] as \$key => \$value) {
-                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
-                }
-                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
-                echo \Carbon\CarbonInterval::days(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
-                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
-            ?>";
+        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::days(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
     }
     
     /** 
@@ -282,33 +204,7 @@ class BladeShortcutsBladeDirectives
      */
     public function cascadeMonths($expression): string
     {
-        return "<?php   
-                \$normal = [
-                    'year' => 'months',
-                    'month' => 'days',
-                    'week' => 'days',
-                    'day' => 'hours',
-                    'hour' => 'minutes',
-                    'minute' => 'seconds',
-                ]; 
-                \$expression = collect(($expression))->map(function (\$item) {
-                    if(is_array(\$item)) {
-                        return \$item;
-                    }
-                    return trim(\$item, \"'\");
-                })->toArray();
-                if(!isset(\$expression[1])) {
-                    \$expression[1] = [];
-                }
-                \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
-                \$newfactors = [];
-                foreach (\$expression[1] as \$key => \$value) {
-                    \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
-                }
-                \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
-                echo \Carbon\CarbonInterval::months(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
-                \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
-            ?>";
+        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::months(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
     }
 
     /** 
@@ -319,6 +215,11 @@ class BladeShortcutsBladeDirectives
      * @return string
      */
     public function cascadeYears($expression): string
+    {
+        return $this->cascadeBase($expression, "echo \Carbon\CarbonInterval::years(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);");
+    }
+
+    private function cascadeBase($expression, $code): string
     {
         return "<?php   
                 \$normal = [
@@ -344,12 +245,10 @@ class BladeShortcutsBladeDirectives
                     \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
                 }
                 \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);
-                echo \Carbon\CarbonInterval::years(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
+                ".$code."
                 \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
             ?>";
     }
-
-
 
     /**
      * Filesize directive
