@@ -189,6 +189,11 @@ class BladeShortcutsBladeDirectives
                 \$cascades = \Carbon\CarbonInterval::getCascadeFactors();
                 \$newfactors = [];
                 foreach (\$expression[1] as \$key => \$value) {
+                    if(is_numeric(\$key)) {
+                        \$value2 = \Carbon\CarbonInterval::getFactor(\$normal[\$value], \$value);
+                        \$newfactors[\$value] = [(int)\$value2, \$normal[\$value]];
+                        continue;
+                    }
                     \$newfactors[\$key] = [(int)\$value, \$normal[\$key]];
                 }
                 \Carbon\CarbonInterval::setCascadeFactors(\$newfactors);

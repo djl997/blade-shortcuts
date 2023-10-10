@@ -36,6 +36,13 @@ class CascadeTest extends TestCase
         $this->assertSame('30w 1d', $this->blade->render($blade));
     }
 
+    public function testCascadeFromDaysWithFormat()
+    {
+        $blade = '@cascadeFromHours([4000, [\'hour\']])';
+
+        $this->assertSame('4000h', $this->blade->render($blade));
+    }
+
     public function testCascadeFromHours()
     {
         $blade = '@cascadeFromHours(121)';
