@@ -9,7 +9,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 {
     use InteractsWithViews;
  
-        protected $blade;
+    protected $blade;
 
     public function setUp(): void
     {
