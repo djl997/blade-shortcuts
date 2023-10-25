@@ -74,10 +74,10 @@ class BladeShortcutsBladeDirectives
      */
     public function date(string $expression): string
     {
-        $arr = Parser::multipleArgs($expression);
-
-        if ($expression[0] == 'null')
+        if ($expression == 'null')
             return "";
+
+        $arr = Parser::multipleArgs($expression);
 
         if (empty($expression))
             $expression = 'null';
