@@ -82,6 +82,12 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::cascade($expression, 'seconds');
         });
 
+        /**
+         * Safe nl2br
+         */
+        Blade::directive('nl2br', function ($expression): string {
+            return BladeShortcutsDirectives::nl2br($expression);
+        });
 
         /**
          * Filesizes
