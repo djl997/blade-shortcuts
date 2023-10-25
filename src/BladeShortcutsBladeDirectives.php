@@ -76,6 +76,9 @@ class BladeShortcutsBladeDirectives
     {
         $arr = Parser::multipleArgs($expression);
 
+        if (is_null($expression[0]))
+            return "<?php echo ''; ?>";
+
         if (empty($expression))
             $expression = 'null';
 
@@ -101,6 +104,9 @@ class BladeShortcutsBladeDirectives
      */
     public function datetime(string $date): string
     {
+        if (is_null($date))
+            return "<?php echo ''; ?>";
+
         if (empty($date))
             $date = 'null';
 
@@ -114,6 +120,9 @@ class BladeShortcutsBladeDirectives
      */
     public function year(string $date): string
     {
+        if (is_null($date))
+            return "<?php echo ''; ?>";
+
         if (empty($date))
             $date = 'null';
 
@@ -127,6 +136,9 @@ class BladeShortcutsBladeDirectives
      */
     public function month(string $date): string
     {
+        if (is_null($date))
+            return "<?php echo ''; ?>";
+
         if (empty($date))
             $date = 'null';
 
@@ -140,6 +152,9 @@ class BladeShortcutsBladeDirectives
      */
     public function day(string $date): string
     {
+        if (is_null($date))
+            return "<?php echo ''; ?>";
+
         if (empty($date))
             $date = 'null';
 
@@ -153,6 +168,9 @@ class BladeShortcutsBladeDirectives
      */
     public function time(string $date): string
     {
+        if (is_null($date))
+            return "<?php echo ''; ?>";
+
         if (empty($date))
             $date = 'null';
 
@@ -200,6 +218,16 @@ class BladeShortcutsBladeDirectives
                 echo \Carbon\CarbonInterval::$timeUnit(\$expression[0])->cascade()->forHumans(['options' => 0, 'short' => true]);
                 \Carbon\CarbonInterval::setCascadeFactors(\$cascades);
             ?>";
+    }
+
+    /**
+     * Safe nl2br
+     *  
+     * @param  string  $value
+     */
+    public function nl2br(string $value): string
+    {
+        return "<?php echo nl2br(e($value)); ?>";
     }
 
     /**
