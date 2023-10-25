@@ -76,7 +76,7 @@ class BladeShortcutsBladeDirectives
     {
         $arr = Parser::multipleArgs($expression);
 
-        if (is_null($expression[0]))
+        if ($expression[0] == 'null')
             return "<?php echo ''; ?>";
 
         if (empty($expression))
@@ -104,7 +104,7 @@ class BladeShortcutsBladeDirectives
      */
     public function datetime(string $date): string
     {
-        if (is_null($date))
+        if ($date == 'null')
             return "<?php echo ''; ?>";
 
         if (empty($date))
@@ -120,7 +120,7 @@ class BladeShortcutsBladeDirectives
      */
     public function year(string $date): string
     {
-        if (is_null($date))
+        if ($date == 'null')
             return "<?php echo ''; ?>";
 
         if (empty($date))
@@ -136,7 +136,7 @@ class BladeShortcutsBladeDirectives
      */
     public function month(string $date): string
     {
-        if (is_null($date))
+        if ($date == 'null')
             return "<?php echo ''; ?>";
 
         if (empty($date))
@@ -152,7 +152,7 @@ class BladeShortcutsBladeDirectives
      */
     public function day(string $date): string
     {
-        if (is_null($date))
+        if ($date == 'null')
             return "<?php echo ''; ?>";
 
         if (empty($date))
@@ -168,7 +168,7 @@ class BladeShortcutsBladeDirectives
      */
     public function time(string $date): string
     {
-        if (is_null($date))
+        if ($date == 'null')
             return "<?php echo ''; ?>";
 
         if (empty($date))

@@ -48,8 +48,22 @@ class DateTest extends TestCase
 
     public function testTime()
     {
-        $blade = '@time(now())';
+        $blade = '@time';
 
         $this->assertSame(now()->format('g:i A'), $this->blade->render($blade));
+    }
+
+    public function testNullTime()
+    {
+        $blade = '@time(null)';
+
+        $this->assertSame('', $this->blade->render($blade));
+    }
+
+    public function testNullDateTime()
+    {
+        $blade = '@datetime(null)';
+
+        $this->assertSame('', $this->blade->render($blade));
     }
 }
