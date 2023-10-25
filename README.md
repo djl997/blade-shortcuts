@@ -30,12 +30,13 @@ After installation, all directives should be usable immediately. If something go
     - year
     - month
     - day
-    - cascadeMinutes
-    - cascadeHours
-    - cascadeDays
-    - cascadeWeeks
-    - cascadeMonths
+    - cascadeFromMinutes
+    - cascadeFromHours
+    - cascadeFromDays
+    - cascadeFromWeeks
+    - cascadeFromMonths
 - [Filesizes](#filesize)
+- [Nl2br](#nl2br)
 - [Not empty](#not-empty-inverse-of-empty)
 - [Not isset](#not-isset-inverse-of-isset)
 - [Percentage](#percentage)
@@ -112,6 +113,24 @@ Change the Carbon Interval. For example, if a company has 30 working hours avail
 @filesize(2145) <!-- 2 kB -->
 @filesizemb(124588) <!-- <1 MB -->
 @filesizegb(1198466000) <!-- 1,1 GB -->
+```
+
+### nl2br
+How to display input from a `textarea` in a read-only situation? Maybe you use `{!! $comment !!}`, or you sacrifice the newlines if it would be too unsafe. That is no longer necessary, use the new `@nl2br` directive.
+
+```blade
+@nl2br('Your view will show newlines.\n\n Very intuitive.') 
+<!-- 
+Your view will show newlines.
+
+Very intuitive.
+-->
+
+@nl2br('Your possible unsafe HTML code <script>alert('Hello world')</script>\n will not execute.')
+<!-- 
+Your possible unsafe HTML code <script>alert('Hello world')</script>
+will not execute.
+-->
 ```
 
 ### Not Empty, inverse of @empty
