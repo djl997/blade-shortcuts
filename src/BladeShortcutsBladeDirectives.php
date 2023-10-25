@@ -77,7 +77,7 @@ class BladeShortcutsBladeDirectives
         $arr = Parser::multipleArgs($expression);
 
         if ($expression[0] == 'null')
-            return "<?php echo ''; ?>";
+            return "";
 
         if (empty($expression))
             $expression = 'null';
@@ -85,16 +85,16 @@ class BladeShortcutsBladeDirectives
         if (count($arr) === 2) {
             switch ($arr[1]) {
                 case "'dateOrDiff'":
-                    return "<?php if(!empty($arr[0])) { if(\Carbon\Carbon::parse($arr[0])->diffInHours() > config('blade-shortcuts.dateOrDiff')) { echo Carbon\Carbon::parse($arr[0])->translatedFormat(__('blade_directives::format.date')); } else { echo Carbon\Carbon::parse($arr[0])->diffForHumans(['options' => Carbon\Carbon::ONE_DAY_WORDS]); } } else { echo ''; } ?>";
+                    return "<?php if(is_null($arr[0])) { echo ''; } else { if(!empty($arr[0])) { if(\Carbon\Carbon::parse($arr[0])->diffInHours() > config('blade-shortcuts.dateOrDiff')) { echo Carbon\Carbon::parse($arr[0])->translatedFormat(__('blade_directives::format.date')); } else { echo Carbon\Carbon::parse($arr[0])->diffForHumans(['options' => Carbon\Carbon::ONE_DAY_WORDS]); } } else { echo ''; } } ?>";
                     break;
 
                 default:
-                    return "<?php echo empty($expression) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.date')) : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); ?>";
+                    return "<?php if(is_null($expression)) { echo ''; } else { echo empty($expression) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.date')) : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); } ?>";
                     break;
             }
         }
 
-        return "<?php echo empty($expression) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.date')) : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); ?>";
+        return "<?php if(is_null($expression)) { echo ''; } else { echo empty($expression) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.date')) : \Carbon\Carbon::parse($expression)->translatedFormat(__('blade_directives::format.date')); } ?>";
     }
 
     /**
@@ -104,13 +104,13 @@ class BladeShortcutsBladeDirectives
      */
     public function datetime(string $date): string
     {
-        if ($date == 'null')
-            return "<?php echo ''; ?>";
+        if (strtolower($date) == 'null')
+        return "";
 
         if (empty($date))
-            $date = 'null';
+            $date = '0';
 
-        return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.datetime')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.datetime')); ?>";
+        return "<?php if(is_null($date)) { echo ''; } else { echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.datetime')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.datetime')); } ?>";
     }
 
     /**
@@ -120,13 +120,13 @@ class BladeShortcutsBladeDirectives
      */
     public function year(string $date): string
     {
-        if ($date == 'null')
-            return "<?php echo ''; ?>";
+        if (strtolower($date) == 'null')
+            return "";
 
         if (empty($date))
-            $date = 'null';
+            $date = '0';
 
-        return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.year')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.year')); ?>";
+        return "<?php if(is_null($date)) { echo ''; } else { echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.year')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.year')); } ?>";
     }
 
     /**
@@ -136,13 +136,13 @@ class BladeShortcutsBladeDirectives
      */
     public function month(string $date): string
     {
-        if ($date == 'null')
-            return "<?php echo ''; ?>";
+        if (strtolower($date) == 'null')
+            return "";
 
         if (empty($date))
-            $date = 'null';
+            $date = '0';
 
-        return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.month')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.month')); ?>";
+        return "<?php if(is_null($date)) { echo ''; } else { echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.month')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.month')); } ?>";
     }
 
     /**
@@ -152,13 +152,13 @@ class BladeShortcutsBladeDirectives
      */
     public function day(string $date): string
     {
-        if ($date == 'null')
-            return "<?php echo ''; ?>";
+        if (strtolower($date) == 'null')
+            return "";
 
         if (empty($date))
-            $date = 'null';
+            $date = '0';
 
-        return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.day')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.day')); ?>";
+        return "<?php if(is_null($date)) { echo ''; } else { echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.day')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.day')); } ?>";
     }
 
     /**
@@ -168,13 +168,13 @@ class BladeShortcutsBladeDirectives
      */
     public function time(string $date): string
     {
-        if ($date == 'null')
-            return "<?php echo ''; ?>";
+        if (strtolower($date) == 'null')
+            return "";
 
         if (empty($date))
-            $date = 'null';
+            $date = '0';
 
-        return "<?php echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.time')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.time')); ?>";
+        return "<?php if(is_null($date)) { echo ''; } else { echo empty($date) ? \Carbon\Carbon::now()->translatedFormat(__('blade_directives::format.time')) : \Carbon\Carbon::parse($date)->translatedFormat(__('blade_directives::format.time')); } ?>";
     }
 
     /** 

@@ -20,7 +20,7 @@ class DateTest extends TestCase
 
     public function testDateTime()
     {
-        $blade = '@datetime(now())';
+        $blade = '@datetime';
 
         $this->assertSame(now()->format('F j, Y g:i A'), $this->blade->render($blade));
     }
@@ -60,10 +60,52 @@ class DateTest extends TestCase
         $this->assertSame('', $this->blade->render($blade));
     }
 
+    public function testNullVarTime()
+    {
+        $blade = 
+        '@php
+        $foo = null;
+        @endphp
+        @time($foo)';
+
+        $this->assertSame('', $this->blade->render($blade));
+    }
+
+
+    public function testNullDate()
+    {
+        $blade = '@date(null)';
+
+        $this->assertSame('', $this->blade->render($blade));
+    }
+
+    public function testNullVarDate()
+    {
+        $blade = 
+        '@php
+        $foo = null;
+        @endphp
+        @date($foo)';
+
+        $this->assertSame('', $this->blade->render($blade));
+    }
+
     public function testNullDateTime()
     {
         $blade = '@datetime(null)';
 
         $this->assertSame('', $this->blade->render($blade));
     }
+
+    public function testNullVarDateTime()
+    {
+        $blade = 
+        '@php
+        $foo = null;
+        @endphp
+        @datetime($foo)';
+
+        $this->assertSame('', $this->blade->render($blade));
+    }
+    
 }
