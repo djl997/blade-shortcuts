@@ -96,17 +96,26 @@ You even can add a custom date to datetime, time, year, month or day, for exampl
 @year('2022-11-08')
 ```
 
-#### Cascades
+#### Carbon Cascades
 If you want to display a certain amount of time in human readable format, try out the new cascade directives. For example:
 ```blade
 @cascadeFromMinutes(125) <!-- 2h 5m -->
 @cascadeFromHours(146) <!-- 6d 2h -->
 ```
 
-Change the Carbon Interval. For example, if a company has 30 working hours available per day, how long will a project of 125 hours take?
+##### Change the time unit
+If you set the time unit (2nd item in the array), the cascade will cascade max to the given unit.
+```blade
+@cascadeFromMinutes(1530) <!-- 1d 1h 30m -->
+@cascadeFromMinutes([1530, ['hour' => 60]]) <!-- 25h 30m, (Please notice the use of an array!) -->
+```
+
+##### CarbonInterval
+The example above also means you can tweak the [CarbonInterval](https://carbon.nesbot.com/docs/#api-interval). Suppose you have a project that requires 125 hours of work and you can allocate 30 hours per day for it. How many days will it take to complete the project?
 ```blade
 @cascadeFromHours([125, ['day' => 30]]) <!-- 4d 5h -->
 ```
+
 
 ### Filesize
 ```blade
