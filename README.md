@@ -62,10 +62,7 @@ After installation, all directives should be usable immediately. If something go
 
 
 ### Dates
-Automatically translate dates in the correct localized format (currently only EN, NL, DE supported):
-- EN: November 8, 2022
-- NL: 8 november 2022
-- DE: 8. November 2022
+Automatically translate dates in the correct localized format (currently only EN, NL, DE, ES supported).
 
 ```blade
 @date(time()) <!-- November 8, 2022 -->
