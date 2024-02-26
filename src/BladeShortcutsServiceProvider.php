@@ -112,8 +112,16 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::end();
         });
 
+        Blade::directive('notSet', function ($expression): string {
+            return BladeShortcutsDirectives::notSet($expression);
+        });
+        Blade::directive('endNotSet', function (): string {
+            return BladeShortcutsDirectives::end();
+        });
+
+        // notIsset is renamed to notSet, keeping the old name as an alias
         Blade::directive('notIsset', function ($expression): string {
-            return BladeShortcutsDirectives::notIsset($expression);
+            return BladeShortcutsDirectives::notSet($expression);
         });
         Blade::directive('endNotIsset', function (): string {
             return BladeShortcutsDirectives::end();

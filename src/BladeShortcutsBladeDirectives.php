@@ -272,7 +272,7 @@ class BladeShortcutsBladeDirectives
      * 
      * @return string
      */
-    public function notIsset(string $value): string
+    public function notSet(string $value): string
     {
         return "<?php if(!isset($value)): ?>";
     }
