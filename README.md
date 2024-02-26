@@ -65,50 +65,51 @@ After installation, all directives should be usable immediately. If something go
 Automatically translate dates in the correct localized format (currently only EN, NL, DE, ES supported).
 
 ```blade
-@date(time()) <!-- November 8, 2022 -->
-@date(date('Y-m-d')) <!-- November 8, 2022 -->
+@date() <!-- February 8, 2024 -->
+@date(time()) <!-- February 8, 2024 -->
+@date(date('Y-m-d')) <!-- February 8, 2024 -->
 ```
 
 Other options:
 ```blade
-@date(now()->subHours(20)) <!-- November 14, 2022 -->
+@date(now()->subHours(20)) <!-- February 14, 2024 -->
 @date(now()->subHours(20), 'dateOrDiff') <!-- 20 hours ago -->
-@date(now()->subWeek()) <!-- November 8, 2022 -->
-@date(now()->subWeek(), 'dateOrDiff') <!-- November 8, 2022 -->
+@date(now()->subWeek()) <!-- February 8, 2024 -->
+@date(now()->subWeek(), 'dateOrDiff') <!-- February 8, 2024 -->
 ```
 > If the time difference is more than 23 hours, ‘dateOrDiff’ will automatically show the date in a localized format instead of ‘x time ago’ or ‘in x time’. You can adjust this threshold in the config file: `php artisan vendor:publish --tag=blade-shortcuts-config`. 
 
 Try shortcuts for datetime, time, year, month or day (also in the correct localized format):
 ```blade
-@datetime <!-- November 8, 2022 3:04 PM -->
+@datetime <!-- February 8, 2024 3:04 PM -->
 @time <!-- 3:04 PM -->
-@year <!-- 2022 -->
-@month <!-- November -->
+@year <!-- 2024 -->
+@month <!-- February -->
 @day <!-- Tuesday -->
 ```
 
 You even can add a custom date to datetime, time, year, month or day, for example:
 ```blade
-@day(now())
-@year('2022-11-08')
+@day(now()) <!-- Thursday -->
+@year('2024-02-08')  <!-- 2024 -->
 ```
 
 #### Carbon Cascades
-If you want to display a certain amount of time in human readable format, try out the new cascade directives. For example:
+If you want to display a certain amount of time in human readable format, try out the new cascade directives. For example, convert 125 minutes to a readable format:
 ```blade
 @cascadeFromMinutes(125) <!-- 2h 5m -->
 @cascadeFromHours(146) <!-- 6d 2h -->
 ```
 
 ##### Change the time unit
-If you set the time unit (2nd item in the array), the cascade will cascade max to the given unit.
+If you set the time unit (2nd item in the array), the cascade will cascade max to the given unit. In the example below, we have 1530 minutes, divided into hours of 60 minutes:
 ```blade
 @cascadeFromMinutes(1530) <!-- 1d 1h 30m -->
 @cascadeFromMinutes([1530, ['hour' => 60]]) <!-- 25h 30m, (Please notice the use of an array!) -->
 ```
 
 ##### CarbonInterval
-The example above also means you can tweak the [CarbonInterval](https://carbon.nesbot.com/docs/#api-interval). Suppose you have a project that requires 125 hours of work and you can allocate 30 hours per day for it. How many days will it take to complete the project?
+The example above also means you can tweak the [CarbonInterval](https://carbon.nesbot.com/docs/#api-interval). Suppose you have a project that requires 125 hours of work and you can allocate 30 hours per day for it. How many days will it take to complete the project? We use the `@cascadeFromHours` directive to calculate this value:
 ```blade
 @cascadeFromHours([125, ['day' => 30]]) <!-- 4d 5h -->
 ```
@@ -122,8 +123,7 @@ The example above also means you can tweak the [CarbonInterval](https://carbon.n
 ```
 
 ### nl2br
-How to display input from a `textarea` in a read-only situation? Maybe you use `{!! $comment !!}`, or you sacrifice the newlines if it would be too unsafe. That is no longer necessary, use the new `@nl2br` directive.
-
+How to display input from a `textarea` in a read-only situation? Maybe you use `{!! $comment !!}` to get unexcaped data. In this way, you loose the XSS prevention, so maybe you sacrifice the newlines if the risk is too high. Now, that is no longer necessary: use the `@nl2br` directive.
 ```blade
 @nl2br('Your view will show newlines.\n\n Very intuitive.') 
 <!-- 
@@ -146,11 +146,11 @@ will not execute.
 @endNotEmpty
 ```
 
-### Not Isset, inverse of @isset
+### Not set, inverse of @isset
 ```blade
-@notIsset($notSetVariable)
+@notSet($notSetVariable)
     I'm not set.
-@endNotIsset
+@endNotSet
 ```
 
 ### Percentages
@@ -164,9 +164,9 @@ will not execute.
 @percentage(-5) <!-- -5% -->
 ```
 
-## Helpers
+### Helpers
 
-### Arrays
+#### Arrays
 ```blade
 <?php $array = ['Tailwind', 'Alpine', 'Laravel', 'Livewire']; ?>
 
@@ -181,7 +181,7 @@ Tailwind, Alpine, Laravel and Livewire
 ```
 Find all available methods in [Laravel Docs](https://laravel.com/docs/10.x/helpers#arrays-and-objects-method-list).
 
-### Fluent strings
+#### Fluent strings
 ```blade
 <!-- Before -->
 {{ Illuminate\Support\Str::of('    laravel    framework    ')->squish() }}
