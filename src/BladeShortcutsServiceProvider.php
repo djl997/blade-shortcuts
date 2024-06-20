@@ -65,6 +65,16 @@ class BladeShortcutsServiceProvider extends ServiceProvider
         Blade::directive('time', function ($expression): string {
             return BladeShortcutsDirectives::time($expression);
         });
+
+        Blade::directive('dayOfWeek', function ($expression): string {
+            return BladeShortcutsDirectives::dayOf($expression, 'd');
+        });
+        Blade::directive('dayOfMonth', function ($expression): string {
+            return BladeShortcutsDirectives::dayOf($expression, 'D');
+        });
+        Blade::directive('dayOfYear', function ($expression): string {
+            return BladeShortcutsDirectives::dayOf($expression, 'DDD');
+        });
         
         Blade::directive('cascadeFromMonths', function ($expression): string {
             return BladeShortcutsDirectives::cascade($expression, 'months');

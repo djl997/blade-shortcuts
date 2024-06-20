@@ -94,6 +94,22 @@ You even can add a custom date to datetime, time, year, month or day, for exampl
 @year('2024-02-08')  <!-- 2024 -->
 ```
 
+#### Day of Week, Day of Month, Day of Year
+In some cases you need the x day of week, month or year.
+
+```php
+@dayOfWeek
+@dayOfMonth
+@dayOfYear
+```
+
+Or generate it based on a value:
+```php
+@dayOfWeek('2024-06-20')
+@dayOfWeek(now()->subDay())
+@dayOfMonth($user->updated_at)
+```
+
 #### Carbon Cascades
 If you want to display a certain amount of time in human readable format, try out the new cascade directives. For example, convert 125 minutes to a readable format:
 ```blade

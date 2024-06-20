@@ -162,6 +162,20 @@ class BladeShortcutsBladeDirectives
     }
 
     /**
+     * 
+     */
+    public function dayOf(string $date, string $code)
+    {
+        if ($date == 'null')
+            return "";
+
+        if (empty($date))
+            $date = '0';
+
+        return "<?php if(is_null($date)) { echo ''; } else { echo empty($date) ? \Carbon\Carbon::now()->isoFormat('$code') : \Carbon\Carbon::parse($date)->isoFormat('$code'); } ?>";
+    }
+
+    /**
      * Convert date to local timeformat
      * 
      * @param  string  $date  
