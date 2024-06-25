@@ -97,17 +97,17 @@ You even can add a custom date to datetime, time, year, month or day, for exampl
 #### Day of Week, Day of Month, Day of Year
 In some cases you need the x day of week, month or year.
 
-```php
-@dayOfWeek
-@dayOfMonth
-@dayOfYear
+```blade
+@dayOfWeek <!-- 2 -->
+@dayOfMonth <!-- 25 -->
+@dayOfYear <!-- 177 -->
 ```
 
 Or generate it based on a value:
-```php
-@dayOfWeek('2024-06-20')
-@dayOfWeek(now()->subDay())
-@dayOfMonth($user->updated_at)
+```blade
+@dayOfWeek('2024-06-25') <!-- 2 -->
+@dayOfWeek(now()->subDay()) <!-- 1 -->
+@dayOfMonth($user->updated_at) <!-- 177 -->
 ```
 
 #### Carbon Cascades
