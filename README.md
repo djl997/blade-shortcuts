@@ -30,11 +30,16 @@ After installation, all directives should be usable immediately. If something go
     - year
     - month
     - day
-    - cascadeFromMinutes
-    - cascadeFromHours
-    - cascadeFromDays
-    - cascadeFromWeeks
-    - cascadeFromMonths
+    - [dayOf...](#day-of-week-day-of-month-day-of-year)
+        - dayOfWeek
+        - dayOfMonth
+        - dayOfYear
+    - [cascades](#carbon-cascades)
+        - cascadeFromMinutes
+        - cascadeFromHours
+        - cascadeFromDays
+        - cascadeFromWeeks
+        - cascadeFromMonths
 - [Filesizes](#filesize)
 - [Nl2br](#nl2br)
 - [Not empty](#not-empty-inverse-of-empty)
@@ -95,19 +100,19 @@ You even can add a custom date to datetime, time, year, month or day, for exampl
 ```
 
 #### Day of Week, Day of Month, Day of Year
-In some cases you need the x day of week, month or year.
+In some cases you need the _x_ day of week, month or year.
 
 ```blade
-@dayOfWeek <!-- 2 -->
-@dayOfMonth <!-- 25 -->
 @dayOfYear <!-- 177 -->
+@dayOfMonth <!-- 25 -->
+@dayOfWeek <!-- 2 -->
 ```
 
 Or generate it based on a value:
 ```blade
 @dayOfWeek('2024-06-25') <!-- 2 -->
 @dayOfWeek(now()->subDay()) <!-- 1 -->
-@dayOfMonth($user->updated_at) <!-- 177 -->
+@dayOfYear($user->updated_at) <!-- 177 -->
 ```
 
 #### Carbon Cascades
