@@ -21,16 +21,12 @@ After installation, all directives should be usable immediately. If something go
 
 ## Contents
 - [App Name](#app-name)
+- [Arrays](#arrays)
 - [Boolean](#boolean)
 - [Config](#config)
 - [Dates](#dates)
-    - date
-    - datetime
-    - time
-    - year
-    - month
-    - day
-    - [dayOf...](#day-of-week-day-of-month-day-of-year)
+    - date, datetime, time, year, month, day
+    - [dayOf](#day-of-week-day-of-month-day-of-year)
         - dayOfWeek
         - dayOfMonth
         - dayOfYear
@@ -41,13 +37,12 @@ After installation, all directives should be usable immediately. If something go
         - cascadeFromWeeks
         - cascadeFromMonths
 - [Filesizes](#filesize)
+- [Fluent Strings](#fluent-strings)
+- [Money](#money)
 - [Nl2br](#nl2br)
 - [Not empty](#not-empty-inverse-of-empty)
 - [Not isset](#not-isset-inverse-of-isset)
 - [Percentage](#percentage)
-- Helpers
-    - [Arrays](#arrays)
-    - [Fluent Strings](#fluent-strings)
 
 ### App Name
 ```blade
@@ -183,6 +178,15 @@ will not execute.
 @percentage(0.5) <!-- 50% -->
 @percentage(0.505) <!-- 50.5% -->
 @percentage(-5) <!-- -5% -->
+```
+
+### Money
+```blade
+@money() <!-- €0.00  -->
+@money(.99) <!-- €0.99  -->
+@money(112327.20) <!-- €112,327.20  -->
+@money(112327.20, 'JPY') <!-- ¥112,327.20  -->
+@money(112327.20, 'USD', 'es') <!-- 112.327,20 US$  -->
 ```
 
 ### Helpers

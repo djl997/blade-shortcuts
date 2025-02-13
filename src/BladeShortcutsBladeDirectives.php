@@ -312,7 +312,6 @@ class BladeShortcutsBladeDirectives
         return "<?php endif; ?>";
     }
 
-
     /**
      * Fluent strings helper
      */
@@ -327,5 +326,36 @@ class BladeShortcutsBladeDirectives
     public function arr($expression): string
     {
         return "<?php echo Illuminate\Support\Arr::$expression; ?>";
+    }
+
+    /**
+     * Money formatter
+     * 
+     * $expression format:
+     *      @param int|float $money
+     *      @param ?string $currency (default: 'EUR')
+     *      @param ?string $locale (default: config(app.locale))
+     */
+    public function money($expression): string
+    {
+        $money = 0;
+        $currency = '\'EUR\'';
+        $locale = 'config(\'app.locale\')';
+
+        $arr = Parser::multipleArgs($expression);
+
+        if(count($arr) >= 1 && floatval($arr[0])) {
+            $money = $arr[0];
+
+            if(count($arr) >= 2) {
+                $currency = $arr[1];
+                
+                if(count($arr) === 3) {
+                    $locale = $arr[2];
+                }
+            } 
+        }
+
+        return "<?php echo numfmt_format_currency(numfmt_create($locale, \NumberFormatter::CURRENCY), $money, $currency); ?>";
     }
 }
