@@ -119,14 +119,14 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::notEmpty($expression);
         });
         Blade::directive('endNotEmpty', function (): string {
-            return BladeShortcutsDirectives::end();
+            return BladeShortcutsDirectives::endIf();
         });
 
         Blade::directive('notSet', function ($expression): string {
             return BladeShortcutsDirectives::notSet($expression);
         });
         Blade::directive('endNotSet', function (): string {
-            return BladeShortcutsDirectives::end();
+            return BladeShortcutsDirectives::endIf();
         });
 
         // notIsset is renamed to notSet, keeping the old name as an alias
@@ -134,7 +134,7 @@ class BladeShortcutsServiceProvider extends ServiceProvider
             return BladeShortcutsDirectives::notSet($expression);
         });
         Blade::directive('endNotIsset', function (): string {
-            return BladeShortcutsDirectives::end();
+            return BladeShortcutsDirectives::endIf();
         });
 
         /**

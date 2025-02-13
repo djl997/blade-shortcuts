@@ -307,7 +307,7 @@ class BladeShortcutsBladeDirectives
      * 
      * @return string
      */
-    public function end(): string
+    public function endIf(): string
     {
         return "<?php endif; ?>";
     }
