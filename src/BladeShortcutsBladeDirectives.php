@@ -336,7 +336,7 @@ class BladeShortcutsBladeDirectives
      *      @param ?string $currency (default: 'EUR')
      *      @param ?string $locale (default: config(app.locale))
      */
-    public function money($expression): string
+    public function simpleMoney($expression): string
     {
         $money = 0;
         $currency = '\'EUR\'';

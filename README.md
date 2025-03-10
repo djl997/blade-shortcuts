@@ -180,13 +180,13 @@ will not execute.
 @percentage(-5) <!-- -5% -->
 ```
 
-### Money
+### Simple Money
 ```blade
-@money() <!-- €0.00  -->
-@money(.99) <!-- €0.99  -->
-@money(112327.20) <!-- €112,327.20  -->
-@money(112327.20, 'JPY') <!-- ¥112,327.20  -->
-@money(112327.20, 'USD', 'es') <!-- 112.327,20 US$  -->
+@simpleMoney() <!-- €0.00  -->
+@simpleMoney(.99) <!-- €0.99  -->
+@simpleMoney(112327.20) <!-- €112,327.20  -->
+@simpleMoney(112327.20, 'JPY') <!-- ¥112,327.20  -->
+@simpleMoney(112327.20, 'USD', 'es') <!-- 112.327,20 US$  -->
 ```
 
 ### Helpers

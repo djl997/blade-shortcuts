@@ -140,8 +140,8 @@ class BladeShortcutsServiceProvider extends ServiceProvider
         /**
          * Financial
          */
-        Blade::directive('money', function ($expression): string {
-            return BladeShortcutsDirectives::money($expression);
+        Blade::directive('simpleMoney', function ($expression): string {
+            return BladeShortcutsDirectives::simpleMoney($expression);
         });
         Blade::directive('percentage', function ($expression): string {
             return BladeShortcutsDirectives::percentage($expression);
