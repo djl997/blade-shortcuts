@@ -22,7 +22,7 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^7.32"
+        "orchestra/testbench": "^10.4"
     },
     "authors": [
         {
@@ -31,7 +31,7 @@
         }
     ],
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/testbench package:test"
     },
     "require": {
         "php": "^8.0",
