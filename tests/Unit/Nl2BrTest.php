@@ -1,8 +1,10 @@
 <?php
 
-namespace Djl997\Tests;
+namespace Djl997\Tests\Unit;
 
-class NL2BRTest extends TestCase
+use Djl997\Tests\TestCase;
+
+class Nl2BrTest extends TestCase
 {
     public function testNl2br()
     {
