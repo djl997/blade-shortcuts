@@ -81,7 +81,7 @@ class DateTest extends TestCase
         $this->assertSame('', $this->blade->render($blade));
     }
 
-    public function testNullVarDate()
+    public function testNullVariableDate()
     {
         $blade = 
         '@php
@@ -99,7 +99,7 @@ class DateTest extends TestCase
         $this->assertSame('', $this->blade->render($blade));
     }
 
-    public function testNullVarDateTime()
+    public function testNullVariableDateTime()
     {
         $blade = 
         '@php

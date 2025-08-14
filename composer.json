@@ -9,8 +9,20 @@
         "blade"
     ],
     "license": "MIT",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Dirk Jan",
+            "email": "dirkjan@q2-software.nl"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "nesbot/carbon": "^2.31|^3.0",
+        "laravel/framework": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.4"
+    },
     "autoload": {
         "psr-4": {
             "Djl997\\BladeShortcuts\\": "src/"
@@ -21,22 +33,8 @@
             "Djl997\\Tests\\": "tests"
         }
     },
-    "require-dev": {
-        "orchestra/testbench": "^10.4"
-    },
-    "authors": [
-        {
-            "name": "Dirk Jan",
-            "email": "dirkjan@q2-software.nl"
-        }
-    ],
     "scripts": {
         "test": "vendor/bin/testbench package:test"
-    },
-    "require": {
-        "php": "^8.0",
-        "nesbot/carbon": "^2.31|^3.0",
-        "laravel/framework": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0"
     },
     "extra": {
         "laravel": {
@@ -44,5 +42,7 @@
                 "Djl997\\BladeShortcuts\\BladeShortcutsServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
