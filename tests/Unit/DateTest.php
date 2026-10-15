@@ -109,5 +109,11 @@ class DateTest extends TestCase
 
         $this->assertSame('', $this->blade->render($blade));
     }
-    
+
+    public function testDateOrDiff()
+    {
+        $this->assertSame('2 hours ago', $this->blade->render("@date(now()->subHours(2), 'dateOrDiff')"));
+        $this->assertSame(now()->subHours(30)->format('F j, Y'), $this->blade->render("@date(now()->subHours(30), 'dateOrDiff')"));
+        $this->assertSame(now()->addHours(30)->format('F j, Y'), $this->blade->render("@date(now()->addHours(30), 'dateOrDiff')"));
+    }
 }
